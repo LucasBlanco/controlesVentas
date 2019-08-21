@@ -1,0 +1,23 @@
+components:
+  schemas:
+    Empresa:
+      type: object
+      properties:
+        empresa:
+          type: string
+          example: Google
+        direccion:
+          type: string
+          example: Av. 9 de Julio 1000
+        localidad:
+          type: string
+          example: Una observacion
+        cantidadEmpleados:
+          type: number
+          example: 5
+        horaEntrada:
+          type: string
+          example: 10:10
+        horaSalida:
+          type: string
+          example: 10:10

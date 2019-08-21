@@ -53,10 +53,10 @@ class SagasTest extends TestCase
 
         $sagas = new Sagas(collect([$sagasProcess, $sagasProcessError]));
 
-        $response = $sagas->execute();
+        $response = $sagas->execute()->status;
 
 
-        $this->assertInstanceOf(Exception::class, $response);
+        $this->assertEquals(500, $response);
 
     }
 }

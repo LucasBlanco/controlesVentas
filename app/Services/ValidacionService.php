@@ -40,8 +40,6 @@ class ValidacionService
         $newValidacion->super = $super;
         $newValidacion->id_venta = $idVenta;
         $newValidacion->save();
-
-
     }
 
     public function compensateStore(Collection $validacion)

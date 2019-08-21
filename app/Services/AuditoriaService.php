@@ -14,19 +14,16 @@ use Illuminate\Support\Collection;
 
 class AuditoriaService
 {
-    private $ventaSrv;
 
-    public function __construct(VentaServiceGateway $ventaSrv)
+    public function __construct()
     {
-        $this->ventaSrv = $ventaSrv;
     }
 
-    public function auditar($audios, $observacion, $adherentes, $venta, Collection $auditoria)
+    public function store(Collection $auditoria)
     {
 
-        $auditoriaPromise = $this->ventaSrv->auditar(
-            $auditoria
-        );
+        ['rutas' => $audios, 'observacion' => $observacion,
+            'adherentes' => $adherentes, 'idVenta' => $idVenta] = $auditoria;
 
         $newAuditoria = new Auditoria();
         $newAuditoria->audio1 = $audios[0];
@@ -34,11 +31,13 @@ class AuditoriaService
         $newAuditoria->audio3 = $audios[2];
         $newAuditoria->observacion = $observacion;
         $newAuditoria->adherentes = $adherentes;
-        $newAuditoria->id_venta = $venta;
+        $newAuditoria->id_venta = $idVenta;
         $newAuditoria->save();
 
-        $auditoriaPromise->wait();
+    }
 
+    public function compensateStore(Collection $auditoria){
+        Auditoria::destroy($auditoria['idVenta']);
     }
 
     public function delete($auditorias)

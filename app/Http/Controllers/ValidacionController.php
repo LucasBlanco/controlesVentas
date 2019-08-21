@@ -29,6 +29,7 @@ class ValidacionController extends Controller
         $validacionExitosa = ($codem && $afip && $super);
         $validacion = collect($request->all())->except(['codem', 'afip', 'superr']);
 
+        $this->storeValidacion($request);
 
         $storeProcess = new SagasProcess(
             [$this->service, 'store'],
@@ -52,6 +53,37 @@ class ValidacionController extends Controller
 
         return response()->json($response->data, $response->status);
 
+    }
+
+    public function storeValidacion(Request $request){
+
+        $this->validate($request,
+            [
+                'idVenta' => 'required|integer',
+                'codem' => 'required|boolean',
+                'afip' => 'required|boolean',
+                'superr' => 'required|boolean',
+                'observacion' => 'filled',
+                'capitas' => 'filled|integer',
+                'datosEmpresa' => 'filled|array',
+                'datosEmpresa.empresa' => 'required_with:datosEmpresa',
+                'datosEmpresa.direccion' => 'required_with:datosEmpresa',
+                'datosEmpresa.localidad' => 'required_with:datosEmpresa',
+                'datosEmpresa.cantidadEmpleados' => 'sometimes|required_with:datosEmpresa',
+                'datosEmpresa.horaEntrada' => 'sometimes|required_with:datosEmpresa',
+                'datosEmpresa.horaSalida' => 'sometimes|required_with:datosEmpresa',
+            ],
+            [
+                'idVenta' => 'preventa',
+                'datosEmpresa' => 'empresa',
+                'datosEmpresa.empresa' => 'razon social',
+                'datosEmpresa.direccion' => 'direccion',
+                'datosEmpresa.localidad' => 'localidad',
+                'datosEmpresa.cantidadEmpleados' => 'cantidad de empleados',
+                'datosEmpresa.horaEntrada' => 'hora entrada',
+                'datosEmpresa.horaSalida' => 'hora salida',
+            ]
+        );
     }
 
     public function all()

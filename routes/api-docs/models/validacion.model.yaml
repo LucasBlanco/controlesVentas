@@ -1,0 +1,28 @@
+components:
+  schemas:
+    Validacion:
+      type: object
+      properties:
+        idVenta:
+          type: integer
+          example: 1
+        estado:
+          type: string
+          example: OK
+        observacion:
+          type: string
+          example: Una observacion
+        capitas:
+          type: string
+          example: capitas
+        adherentes:
+          type: string
+          example: adherentes
+        cantidadAudios:
+          type: integer
+          example: 3
+        datosEmpresa:
+          type: array
+          items:
+            ref: './empresa.model.yaml#/components/schemas/Empresa'
+
