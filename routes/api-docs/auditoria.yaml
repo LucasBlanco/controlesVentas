@@ -1,0 +1,29 @@
+
+openapi: 3.0.0
+info:
+  title: 'Auditoria'
+  version: 1.0.0
+servers:
+  - url: 'http://remoto.com'
+    description: 'Prod server'
+  - url: 'http://controles.test:8000'
+    description: 'Dev server'
+paths:
+  /validaciones:
+    post:
+      description: Crear una nueva auditoria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Auditoria'
+      responses:
+        200:
+          description: Exito al crear la Auditoria
+
+components:
+  schemas:
+    Auditoria:
+      $ref: './models/auditoria.model.yaml#/components/schemas/Auditoria'
+
