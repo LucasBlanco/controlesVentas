@@ -27,5 +27,4 @@ components:
         datosEmpresa:
           type: array
           items:
-            ref: './empresa.model.yaml#/components/schemas/Empresa'
-
+            $ref: "./empresa.model.yaml#/components/schemas/Empresa"

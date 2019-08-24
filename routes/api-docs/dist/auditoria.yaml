@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  title: Auditoria
+  version: 1.0.0
+servers:
+  - url: http://remoto.com
+    description: Prod server
+  - url: http://controles.test:8000
+    description: Dev server
+paths:
+  /validaciones:
+    post:
+      description: Crear una nueva auditoria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Auditoria"
+      responses:
+        "200":
+          description: Exito al crear la Auditoria
+components:
+  schemas:
+    Auditoria:
+      type: object
+      properties:
+        idVenta:
+          type: integer
+          example: 1
+        estado:
+          type: string
+          example: OK
+        observacion:
+          type: string
+          example: Una observacion
+        capitas:
+          type: string
+          example: capitas
+        adherentes:
+          type: string
+          example: adherentes
+        cantidadAudios:
+          type: integer
+          example: 3
+        recuperable:
+          type: boolean
+          example: true
+        datosEmpresa:
+          type: array
+          items:
+            type: object
+            properties:
+              empresa:
+                type: string
+                example: Google
+              direccion:
+                type: string
+                example: Av. 9 de Julio 1000
+              localidad:
+                type: string
+                example: Una observacion
+              cantidadEmpleados:
+                type: number
+                example: 5
+              horaEntrada:
+                type: string
+                example: 10:10
+              horaSalida:
+                type: string
+                example: 10:10
