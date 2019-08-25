@@ -31,6 +31,9 @@
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "build-api": [
+            "./routes/api-docs/build.sh"
         ]
     },
     "config": {
